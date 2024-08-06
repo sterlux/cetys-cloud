@@ -1,198 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Chapter 1: The Motivations For Cloud</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        #slideContainer {
-            width: 90%;
-            max-width: 1000px;
-            height: 80%;
-            position: relative;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        .slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            padding: 40px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.5s ease-in-out;
-        }
-        .slide.active {
-            opacity: 1;
-        }
-        .content {
-            width: 60%;
-        }
-        .image-placeholder {
-            width: 35%;
-            height: 60%;
-            background-color: #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 1.2em;
-            color: #666;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            font-size: 2em;
-            margin-bottom: 20px;
-        }
-        h2 {
-            color: #3498db;
-            font-size: 1.5em;
-            margin-bottom: 15px;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 10px;
-        }
-        .nav-buttons {
-            margin-top: 20px;
-            display: flex;
-            gap: 20px;
-        }
-        .nav-button {
-            padding: 10px 20px;
-            font-size: 1em;
-            cursor: pointer;
-            background-color: #3498db;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        .nav-button:hover {
-            background-color: #2980b9;
-        }
-        .logo-placeholder {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            width: 100px;
-            height: 50px;
-            background-color: #ddd;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 0.8em;
-            color: #666;
-        }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #535353;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #slideContainer {
+        width: 90%;
+        max-width: 1800px;
+        height: 90%;
+        position: relative;
+        background-color: rgb(43, 43, 43);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        color: #ddd;
+        font-size: 2em;
+      }
+      .slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 40px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+      }
+      .slide.active {
+        opacity: 1;
+      }
+      .content {
+        width: 50%;
+      }
+      .image-placeholder {
+        width: fit-content;
+        height: 50%;
+        display: flex;
+        justify-content: center;
+      }
+      h1 {
+        color: #2c3e50;
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 20px;
+      }
+      h2 {
+        color: #3498db;
+        font-size: 1.5em;
+        margin-bottom: 15px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .nav-buttons {
+        margin-top: 20px;
+        display: flex;
+        gap: 20px;
+      }
+      .nav-button {
+        padding: 10px 20px;
+        font-size: 1em;
+        cursor: pointer;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+      .nav-button:hover {
+        background-color: #2980b9;
+      }
+      .logo-placeholder {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        width: 100px;
+        height: 80px;
+        display: flex;
+        justify-content: center;
+        font-size: 0.8em;
+        color: #666;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="slideContainer"></div>
     <div class="nav-buttons">
-        <button class="nav-button" onclick="changeSlide(-1)">Previous</button>
-        <button class="nav-button" onclick="changeSlide(1)">Next</button>
+      <button class="nav-button" onclick="changeSlide(-1)">Previous</button>
+      <button class="nav-button" onclick="changeSlide(1)">Next</button>
     </div>
 
     <script>
-        const slides = [
-            {
-                title: "Chapter 1: The Motivations For Cloud",
-                content: "<p>An overview of cloud computing motivations and evolution</p>"
-            },
-            {
-                title: "1.1 Cloud Computing Everywhere",
-                content: "<ul><li>Cloud computing has become significant in a short time</li><li>Examples: startups, IoT devices, enterprise companies, shared documents, medical devices</li><li>Most enterprises are moving to the cloud</li><li>Cloud provides processing for IoT devices</li></ul>"
-            },
-            {
-                title: "1.2 A Facility For Flexible Computing",
-                content: "<ul><li>Cloud offers flexible computing, storage, and communication facilities</li><li>Supports incremental growth for startups</li><li>Accommodates cyclic demand for businesses</li><li>Pricing model: customers only pay for facilities they actually use</li></ul>"
-            },
-            {
-                title: "1.3 The Start Of Cloud: The Power Wall And Multiple Cores",
-                content: "<ul><li>Technological factor: limits on speed forced a move to parallelism</li><li>Economic factor: changes in technology changed IT costs</li><li>Power wall: limit on processor speed due to heat generation</li><li>Solution: multicore processors with multiple cores operating at safe speeds</li></ul>"
-            },
-            {
-                title: "1.4 From Multiple Cores To Multiple Machines",
-                content: "<ul><li>Multiple cores don't solve the problem of arbitrary scale</li><li>Cluster architecture: interconnecting inexpensive personal computers</li><li>Allows incremental increase in processing power</li></ul>"
-            },
-            {
-                title: "1.5 From Clusters To Web Sites And Load Balancing",
-                content: "<ul><li>Web sites need to process many independent requests simultaneously</li><li>Load balancers divide incoming traffic among a set of servers</li><li>Allows for easy expansion by adding more servers</li></ul>"
-            },
-            {
-                title: "1.6 Racks Of Server Computers",
-                content: "<ul><li>Servers redesigned to fit into racks</li><li>1U servers can be stacked vertically in racks</li><li>Allows for efficient use of space in data centers</li></ul>"
-            },
-            {
-                title: "1.7 The Economic Motivation For A Centralized Data Center",
-                content: "<ul><li>Lower operating expenses (opex): reduced recurring costs</li><li>Lower capital expenses (capex): reduced equipment costs</li><li>Centralization allows for optimized IT staffing and equipment purchases</li></ul>"
-            },
-            {
-                title: "1.8 Origin Of The Term \"In The Cloud\"",
-                content: "<ul><li>Term arose from early data centers being located close to Internet peering points</li><li>Technically inaccurate but became widely adopted</li></ul>"
-            },
-            {
-                title: "1.9 Centralization Once Again",
-                content: "<ul><li>After decades of decentralization, cloud computing moves back to a centralized model</li><li>Driven by the power wall and cost of IT staffing</li><li>Consolidates computing facilities into data centers</li></ul>"
-            }
-        ];
+      const slides = [
+        {
+          title: "Chapter 1: The Motivations For Cloud",
+          content:
+            "<p>An overview of cloud computing motivations and evolution</p>",
+        },
+        {
+          title: "1.1 Cloud Computing Everywhere",
+          content:
+            "<ul><li>Cloud computing has become significant in a short time</li><li>Examples: startups, IoT devices, enterprise companies, shared documents, medical devices</li><li>Most enterprises are moving to the cloud</li><li>Cloud provides processing for IoT devices</li></ul>",
+        },
+        {
+          title: "1.2 A Facility For Flexible Computing",
+          content:
+            "<ul><li>Cloud offers flexible computing, storage, and communication facilities</li><li>Supports incremental growth for startups</li><li>Accommodates cyclic demand for businesses</li><li>Pricing model: customers only pay for facilities they actually use</li></ul>",
+        },
+        {
+          title: "1.3 The Start Of Cloud: The Power Wall And Multiple Cores",
+          content:
+            "<ul><li>Technological factor: limits on speed forced a move to parallelism</li><li>Economic factor: changes in technology changed IT costs</li><li>Power wall: limit on processor speed due to heat generation</li><li>Solution: multicore processors with multiple cores operating at safe speeds</li></ul>",
+        },
+        {
+          title: "1.4 From Multiple Cores To Multiple Machines",
+          content:
+            "<ul><li>Multiple cores don't solve the problem of arbitrary scale</li><li>Cluster architecture: interconnecting inexpensive personal computers</li><li>Allows incremental increase in processing power</li></ul>",
+        },
+        {
+          title: "1.5 From Clusters To Web Sites And Load Balancing",
+          content:
+            "<ul><li>Web sites need to process many independent requests simultaneously</li><li>Load balancers divide incoming traffic among a set of servers</li><li>Allows for easy expansion by adding more servers</li></ul>",
+        },
+        {
+          title: "1.6 Racks Of Server Computers",
+          content:
+            "<ul><li>Servers redesigned to fit into racks</li><li>1U servers can be stacked vertically in racks</li><li>Allows for efficient use of space in data centers</li></ul>",
+        },
+        {
+          title: "1.7 The Economic Motivation For A Centralized Data Center",
+          content:
+            "<ul><li>Lower operating expenses (opex): reduced recurring costs</li><li>Lower capital expenses (capex): reduced equipment costs</li><li>Centralization allows for optimized IT staffing and equipment purchases</li></ul>",
+        },
+        {
+          title: '1.8 Origin Of The Term "In The Cloud"',
+          content:
+            "<ul><li>Term arose from early data centers being located close to Internet peering points</li><li>Technically inaccurate but became widely adopted</li></ul>",
+        },
+        {
+          title: "1.9 Centralization Once Again",
+          content:
+            "<ul><li>After decades of decentralization, cloud computing moves back to a centralized model</li><li>Driven by the power wall and cost of IT staffing</li><li>Consolidates computing facilities into data centers</li></ul>",
+        },
+      ];
 
-        let currentSlide = 0;
+      let currentSlide = 0;
 
-        function createSlides() {
-            const container = document.getElementById('slideContainer');
-            slides.forEach((slide, index) => {
-                const slideElement = document.createElement('div');
-                slideElement.className = 'slide' + (index === 0 ? ' active' : '');
-                const contentClass = index % 2 === 0 ? 'content' : 'content order-2';
-                const imageClass = index % 2 === 0 ? 'image-placeholder' : 'image-placeholder order-1';
-                slideElement.innerHTML = `
+      function createSlides() {
+        const container = document.getElementById("slideContainer");
+        slides.forEach((slide, index) => {
+          const slideElement = document.createElement("div");
+          slideElement.className = "slide" + (index === 0 ? " active" : "");
+          const contentClass = index % 2 === 0 ? "content" : "content order-2";
+          const imageClass =
+            index % 2 === 0 ? "image-placeholder" : "image-placeholder order-1";
+          slideElement.innerHTML = `
                     <div class="${contentClass}">
                         <h2>${slide.title}</h2>
                         ${slide.content}
                     </div>
-                    <div class="${imageClass}">Image ${index + 1}</div>
-                    <div class="logo-placeholder">Logo</div>
+                    <div class="${imageClass}">
+                        <img src="img/${index + 1}.png"/></div>
+                    <div class="logo-placeholder"><img src="img/logo.png"/></div>
                 `;
-                container.appendChild(slideElement);
-            });
-        }
-
-        function changeSlide(direction) {
-            const allSlides = document.querySelectorAll('.slide');
-            allSlides[currentSlide].classList.remove('active');
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            allSlides[currentSlide].classList.add('active');
-        }
-
-        createSlides();
-
-        // Keyboard support
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') changeSlide(1);
-            if (e.key === 'ArrowLeft') changeSlide(-1);
+          container.appendChild(slideElement);
         });
+      }
+
+      function changeSlide(direction) {
+        const allSlides = document.querySelectorAll(".slide");
+        allSlides[currentSlide].classList.remove("active");
+        currentSlide =
+          (currentSlide + direction + slides.length) % slides.length;
+        allSlides[currentSlide].classList.add("active");
+      }
+
+      createSlides();
+
+      // Keyboard support
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight" || e.key === " ") changeSlide(1);
+        if (e.key === "ArrowLeft") changeSlide(-1);
+      });
     </script>
-</body>
+  </body>
 </html>
