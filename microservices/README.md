@@ -1,8 +1,8 @@
 1. Instala AzureCli y Kubernetes CLI:
 
-```
-az login
-```
+   ```
+   az login
+   ```
 
 2. Crea un Azure Container Registry (ACR):
 
@@ -18,7 +18,7 @@ az login
    docker push elnombredebeserunico.azurecr.io/product-service:v1
    ```
 
-4. Repite el paso 2 para order-service
+4. Repite el paso 3 para order-service
 
 5. Crear el cluster AKS (Azure Kubernetes Service):
 
